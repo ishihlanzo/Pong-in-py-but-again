@@ -27,9 +27,9 @@ class square:
     def draw(self, screen) :
         screen.blit(self.image, self.rect)
 
-class test:
+class backgroud:
     def __init__(self,x ,y) :
-        self.image = pygame.image.load('téléchargé.jfif')
+        self.image = pygame.image.load('background.png')
         self.rect = self.image.get_rect(x=x, y=y)
         self.speed = 15
         self.velocity = [0, 0]
@@ -39,3 +39,13 @@ class test:
 
     def draw(self, screen) :
         screen.blit(self.image, self.rect)
+
+class score:
+    def __init__(self,x ,y) :
+        self.score = [0,0]
+        self.font = pygame.font.Font('Elmono-regular.ttf', 32)
+        self.text = self.font.render(str(self.score), True, (255,255,255))
+        self.rect = self.text.get_rect(x=x, y=y)
+
+    def draw(self, screen) :
+        screen.blit(self.text, self.rect)
