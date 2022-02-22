@@ -1,5 +1,6 @@
 from shutil import move
-from player_template import player1
+from player_template import*
+
 
 
 import pygame
@@ -14,9 +15,9 @@ class game:
         self.screen = screen
         self.running = True
         self.clock = pygame.time.Clock()
-        self.player1 = player1(30, 405)
-        self.player2 = player1(970, 405)
-        self.square = player1(100, 100)
+        self.player1 = player(30, 405)
+        self.player2 = player(970, 405)
+        self.square = square(100, 100)
 
     def handling_event(self):
         for event in pygame.event.get() :
