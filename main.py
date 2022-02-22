@@ -9,51 +9,47 @@ import time
 
 def Pong():
     FPS = 60
+    MOUVEMENT = True
 
-    movement = True
-
-    class game:
+    class Game:
+        
         def __init__(self, screen):
-            self.score = [0, 0]
             self.screen = screen
             self.running = True
             self.clock = pygame.time.Clock()
-            self.player1 = player(100, 405-45)
-            self.player2 = player(900, 405-45)
-            self.square = square(450, 425)
-            self.background = backgroud(0,0)
-            self.backgrounds = score(0,0)
+            self.player_1 = Player(100, 405-45)
+            self.player_2 = Player(900, 405-45)
+            self.square = Square(450, 425)
+            self.background = Backgroud(0,0)
+            self.score = Score(0,0)
             self.direction = 1
             self.orientation = random.uniform(-0.5, 0.5)
             self.speed_up = 0
             
-            
-
-
         def handling_event(self):
             for event in pygame.event.get() :
                     if event.type == pygame.QUIT :
                         self.running = False
             key = pygame.key.get_pressed()
             if key[pygame.K_s] :
-                self.player1.velocity[1] = -1
+                self.player_1.velocity[1] = -1
             elif key[pygame.K_x] :
-                self.player1.velocity[1] = 1
+                self.player_1.velocity[1] = 1
             else : 
-                self.player1.velocity[1] = 0
+                self.player_1.velocity[1] = 0
 
             if key[pygame.K_j] :
-                self.player2.velocity[1] = -1
+                self.player_2.velocity[1] = -1
             elif key[pygame.K_n] :
-                self.player2.velocity[1] = 1
+                self.player_2.velocity[1] = 1
             else : 
-                self.player2.velocity[1] = 0
+                self.player_2.velocity[1] = 0
             
-            if movement :
+            if MOUVEMENT :
                 self.square.velocity[1] = 1 * self.orientation
                 self.square.velocity[0] = 0.5 * self.direction
 
-            if (905 >= self.square.rect.x >= 850) and (len(set(range(self.square.rect.y-25, self.square.rect.y+25)) & set(range(self.player2.rect.y, self.player2.rect.y+180))) != 0 ):
+            if (905 >= self.square.rect.x >= 850) and (len(set(range(self.square.rect.y-25, self.square.rect.y+25)) & set(range(self.player_2.rect.y, self.player_2.rect.y+180))) != 0 ):
 
                 self.direction = 0
                 self.direction = -1 - self.speed_up
@@ -62,7 +58,7 @@ def Pong():
 
 
             
-            if (95 <= self.square.rect.x <= 110 ) and (len(set(range(self.square.rect.y-50, self.square.rect.y+50)) & set(range(self.player1.rect.y, self.player1.rect.y+180))) != 0 )  :
+            if (95 <= self.square.rect.x <= 110 ) and (len(set(range(self.square.rect.y-50, self.square.rect.y+50)) & set(range(self.player_1.rect.y, self.player_1.rect.y+180))) != 0 )  :
 
                 self.direction = 0
                 self.direction = 1 + self.speed_up
@@ -91,19 +87,17 @@ def Pong():
 
             if self.square.rect.x <= 0 :
                 self.direction = abs(self.direction)
-                self.square = square(450, 425)
+                self.square = Square(450, 425)
                 time.sleep(0.5)
-                self.score[1] +=1
-                print(score(self.score))
+                print(self.score)
                 
             
             if self.square.rect.x >= 950 :
                 self.direction = -abs(self.direction)
 
-                self.square = square(450, 425)
+                self.square = Square(450, 425)
                 time.sleep(0.5)
-                self.score[0] +=1
-                print(score(self.score))
+                print(self.score)
                 
 
             
@@ -114,17 +108,17 @@ def Pong():
 
 
         def update(self) :
-            self.player1.move()
-            self.player2.move()
+            self.player_1.move()
+            self.player_2.move()
             self.square.move()
 
 
         def display(self) :
             self.screen.fill('black')
             self.background.draw(self.screen)
-            self.backgrounds.draw(self.screen)
-            self.player1.draw(self.screen)
-            self.player2.draw(self.screen)
+            self.score.draw(self.screen)
+            self.player_1.draw(self.screen)
+            self.player_2.draw(self.screen)
             self.square.draw(self.screen)
             
             pygame.display.flip()
@@ -138,8 +132,8 @@ def Pong():
 
     pygame.init()
     screen = pygame.display.set_mode((1000, 900))
-    game = game(screen)
-    game.run()
+    Game = Game(screen)
+    Game.run()
 
 
     pygame.quit()
