@@ -1,3 +1,4 @@
+from re import X
 from shutil import move
 from player_template import*
 
@@ -39,8 +40,10 @@ class game:
             self.player2.velocity[1] = 0
         
         if movement == True :
-            self.square.velocity[1] = 0.25
+            self.square.velocity[1] = 0
             self.square.velocity[0] = 0.25
+        
+        
 
 
 
@@ -48,6 +51,10 @@ class game:
         self.player1.move()
         self.player2.move()
         self.square.move()
+        '''
+        if self.player2.colliderect(self.player2, self.square) :
+            print('aaa')
+        '''
 
     def display(self) :
         self.screen.fill('black')
