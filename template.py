@@ -1,10 +1,14 @@
 from multiprocessing.sharedctypes import Value
 import pygame
 import random
-
+NSFW = 'no'
+if NSFW == 'yes' :
+    NSFW = ' - Copy'
+else :
+    NSFW = ''
 class Player:
     def __init__(self,x ,y) :
-        self.image = pygame.image.load('player.png')
+        self.image = pygame.image.load(f'player{NSFW}.png')
         self.rect = self.image.get_rect(x=x, y=y)
         self.speed = 15
         self.velocity = [0, 0]
@@ -17,7 +21,7 @@ class Player:
 
 class Square:
     def __init__(self,x ,y) :
-        self.image = pygame.image.load('square.png')
+        self.image = pygame.image.load(f'square{NSFW}.png')
         self.rect = self.image.get_rect(x=x, y=y)
         self.speed = 15
         self.velocity = [0, 0]
@@ -30,7 +34,7 @@ class Square:
 
 class Backgroud:
     def __init__(self,x ,y) :
-        self.image = pygame.image.load('background.png')
+        self.image = pygame.image.load(f'background{NSFW}.png')
         self.rect = self.image.get_rect(x=x, y=y)
         self.speed = 15
         self.velocity = [0, 0]
