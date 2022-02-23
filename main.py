@@ -7,6 +7,7 @@ import tkinter.font as tkFont
 import pygame
 import time
 
+
 def Pong():
     FPS = 60
     MOUVEMENT = True
@@ -89,7 +90,10 @@ def Pong():
                 self.direction = abs(self.direction)
                 self.square = Square(450, 425)
                 time.sleep(0.5)
+                '''
+                self.Score[1] += 1
                 print(self.score)
+                '''
                 
             
             if self.square.rect.x >= 950 :
@@ -97,8 +101,10 @@ def Pong():
 
                 self.square = Square(450, 425)
                 time.sleep(0.5)
+                '''
+                self.Score[0] += 1
                 print(self.score)
-                
+                    '''
 
             
 
@@ -111,6 +117,7 @@ def Pong():
             self.player_1.move()
             self.player_2.move()
             self.square.move()
+            self.score.move()
 
 
         def display(self) :
