@@ -11,6 +11,7 @@ import time
 def Pong():
     FPS = 60
     MOUVEMENT = True
+    WIN = 5
 
     class Game:
         
@@ -22,7 +23,7 @@ def Pong():
             self.player_2 = Player(900, 405-45)
             self.square = Square(450, 425)
             self.background = Backgroud(0,0)
-            self.score = Score(0,0)
+            self.score = [0, 0]
             self.direction = 1
             self.orientation = random.uniform(-0.5, 0.5)
             self.speed_up = 0
@@ -89,41 +90,40 @@ def Pong():
             if self.square.rect.x <= 0 :
                 self.direction = abs(self.direction)
                 self.square = Square(450, 425)
+                self.speed_up = 0
+                self.direction = 1
                 time.sleep(0.5)
-                '''
-                self.Score[1] += 1
-                print(self.score)
-                '''
+                self.score[0] += 1
+                print(f'--------------------\nPlayer gauche : {self.score[1]}\nPlayer droit : {self.score[0]}')
+                if self.score[0] >= WIN :
+                    self.running = False
+                    print('--------------------\nLe joueur de droit a gagné !!')
+
                 
             
             if self.square.rect.x >= 950 :
                 self.direction = -abs(self.direction)
-
                 self.square = Square(450, 425)
+                self.speed_up = 0
+                self.direction = -1
                 time.sleep(0.5)
-                '''
-                self.Score[0] += 1
-                print(self.score)
-                    '''
-
+                
+                self.score[1] += 1
+                print(f'--------------------\nPlayer gauche : {self.score[1]}\nPlayer droit : {self.score[0]}')
+                if self.score[1] >= WIN :
+                    self.running = False
+                    print('--------------------\nLe joueur de gauche a gagné !!')
             
-
-            
-            
-
-
-
         def update(self) :
             self.player_1.move()
             self.player_2.move()
             self.square.move()
-            self.score.move()
+
 
 
         def display(self) :
             self.screen.fill('black')
             self.background.draw(self.screen)
-            self.score.draw(self.screen)
             self.player_1.draw(self.screen)
             self.player_2.draw(self.screen)
             self.square.draw(self.screen)

@@ -2,7 +2,7 @@ import pygame
 import random
 
 
-NSFW = 'off'
+NSFW = 'on'
 if NSFW == 'on' :
     NSFW = '-NSFW'
 else :
@@ -48,7 +48,6 @@ class Backgroud:
     def draw(self, screen) :
         screen.blit(self.image, self.rect)
 
-score = [0,0]
 
 class Score:
     def __init__(self,x ,y) :
@@ -63,5 +62,4 @@ class Score:
 
     def draw(self, screen) :
         screen.blit(self.text, self.rect)
-        score[1] +=1
-        print(score)
+
